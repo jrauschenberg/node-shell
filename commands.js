@@ -127,7 +127,8 @@
       }
       if (newarr) {
         newarr = newarr.join("\n");
-        newarr = newarr.replace(/function/g, chalk.blue("function"));
+        var regex = new RegExp(str, "gi");
+        newarr = newarr.replace(regex, chalk.blue(str));
         done(newarr);
       } else {
         done('No matches found.');
