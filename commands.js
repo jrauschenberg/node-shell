@@ -1,5 +1,6 @@
   var fs = require("fs");
   var request = require('request');
+  var chalk = require('chalk');
 
   var commandPwd = {
 
@@ -117,8 +118,7 @@
     },
 
     grep: function (stdin, str, done) {
-      console.log(stdin, str);
-      var strArr = str.split("\n");
+      var strArr = stdin.split("\n");
       var newarr = [];
       for (var i=0; i<strArr.length; i++) {
         if (strArr[i].indexOf(str) !== -1) {
@@ -126,7 +126,9 @@
         }
       }
       if (newarr) {
-        done(newarr.join("\n"));
+        newarr = newarr.join("\n");
+        newarr = newarr.replace(/function/g, chalk.blue("function"));
+        done(newarr);
       } else {
         done('No matches found.');
       }
